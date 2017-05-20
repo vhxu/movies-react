@@ -1,0 +1,38 @@
+body {
+  padding: 0;
+  margin: 0;
+  margin: 20px auto 0 auto;
+}
+
+body #app {
+  margin: auto;
+  max-width: 1200px;
+
+}
+
+/* start of searchbar.js */
+
+.top {
+  display: flex;
+}
+
+.top div {
+  width: 50%;
+}
+
+.logo {
+
+}
+
+.logo img {
+  width: 100px;
+}
+
+
+
+.search input {
+  width: 100%;
+  height: 50px;
+}
+
+/* end of searchbar.js */
