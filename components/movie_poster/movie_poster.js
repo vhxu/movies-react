@@ -3,17 +3,21 @@ import ReactDOM from 'react-dom';
 import MovieInfo from './movie_info.js'
 
 class MoviePoster extends Component {
+
   render() {
     return (
-      <div>
-        <div>
+      <div className="movie-poster">
+        <div className="poster">
           <img src={'https://image.tmdb.org/t/p/w300' + this.props.info.poster_path} />
         </div>
-        <div>
-          <MovieInfo title={this.props.info.title} release={this.props.info.release_date} rating={this.props.info.vote_average} overview={this.props.info.overview} />
+        <div className="description">
+          <MovieInfo data={this.props.info} />
         </div>
       </div>
     );
+  }
+  componentDidUpdate() {
+    document.body.style.backgroundImage = 'url(' + 'https://image.tmdb.org/t/p/original' + this.props.info.backdrop_path + ')';
   }
 }
 

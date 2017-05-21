@@ -18,7 +18,7 @@ class App extends Component {
 
   getdata() {
     var self = this;
-      fetch('https://api.themoviedb.org/3/search/movie?api_key=2c0adb15cfc22f4aa37121c648eb1c10&query=Jack+Reacher')
+      fetch('https://api.themoviedb.org/3/movie/75780?api_key=2c0adb15cfc22f4aa37121c648eb1c10')
       .then((resp) => resp.json())
       .then(function(data) {
         self.setState({
@@ -31,10 +31,11 @@ class App extends Component {
     this.getdata();
   }
 
-  //this.state.data.results[0].overview
+
+
 
   render() {
-    var data = (this.state.data) ? this.state.data.results[0] : '';
+    var data = (this.state.data) ? this.state.data : '';
     return (
       <div>
         <Searchbar />
