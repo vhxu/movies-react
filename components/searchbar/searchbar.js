@@ -1,7 +1,44 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 
+
+// const getSuggestion = value => {
+//   const inputValue = value.trim().toLowerCase();
+//   const inputLength = inputValue.length;
+//
+//   return inputLength === 0 ? [] : this.props.data.title.filter(title =>
+//   title.toLowerCase().slice(0, inputLength) === inputValue);
+// };
+//
+// const getSuggestionValue = suggestion => suggestion.title;
+//
+// const renderSuggestion = suggestion => (
+//   <div>
+//     {suggestion.name}
+//   </div>
+// );
+//
+// class Searchbar extends Component {
+//   constructor() {
+//     super();
+//
+//     this.state = {
+//       value: '',
+//       suggestions: []
+//     };
+//   }
+//
+//   onChange(event, { newValue }) => {
+//     this.setState({
+//       value: newValue
+//     });
+//   };
 class Searchbar extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {term: ''};
+  }
   render() {
     return (
       <div className="top">
@@ -9,10 +46,16 @@ class Searchbar extends Component {
           <img src= {'https://www.themoviedb.org/assets/static_cache/23e473036b28a59bd5dcfde9c671b1c5/images/v4/logos/312x276-primary-green.png'} />
         </div>
         <div className="search">
-          <input placeholder="Search..." />
+          <input
+            value={this.state.term}
+            onChange={event => this.onInputChange(event.target.value)}/>
         </div>
       </div>
       );
+  }
+  onInputChange(term) {
+    this.setState({term});
+    this.props.searchChange(term);
   }
 }
 

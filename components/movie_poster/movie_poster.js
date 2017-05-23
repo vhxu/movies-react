@@ -8,7 +8,7 @@ class MoviePoster extends Component {
     return (
       <div className="movie-poster">
         <div className="poster">
-          <img src={'https://image.tmdb.org/t/p/w300' + this.props.info.poster_path} />
+          <img src={'https://image.tmdb.org/t/p/w500' + this.props.info.poster_path} />
         </div>
         <div className="description">
           <MovieInfo data={this.props.info} />
