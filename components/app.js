@@ -20,7 +20,8 @@ class App extends Component {
         runtime: "",
         genres: [],
         production_companies: [],
-        budget: 0
+        budget: 0,
+        id: ""
       }
     };
     this.getdata = this.getdata.bind(this);
@@ -37,19 +38,39 @@ class App extends Component {
   //   });
   // }
 
+  // componentDidMount() {
+  //   this.getdata(75780);
+  // }
+
   componentDidMount() {
-    this.getdata(75780);
+    this.getdata('Jack+Reacher');
   }
+
+  // getdata(term) {
+  //   var self = this;
+  //     fetch('https://api.themoviedb.org/3/movie/'+term+'?api_key=2c0adb15cfc22f4aa37121c648eb1c10')
+  //     .then((resp) => resp.json())
+  //     .then(function(data) {
+  //       self.setState({
+  //         data: data
+  //       });
+  //   });
+  // }
 
   getdata(term) {
     var self = this;
-      fetch('https://api.themoviedb.org/3/movie/'+term+'?api_key=2c0adb15cfc22f4aa37121c648eb1c10')
+      fetch('https://api.themoviedb.org/3/search/movie?api_key=2c0adb15cfc22f4aa37121c648eb1c10&query='+term)
       .then((resp) => resp.json())
-      .then(function(data) {
-        self.setState({
-          data: data
+      .then(function(movie) {
+        const id = movie.results[0].id;
+        fetch('https://api.themoviedb.org/3/movie/'+id+'?api_key=2c0adb15cfc22f4aa37121c648eb1c10')
+        .then((resp) => resp.json())
+        .then(function(data) {
+          self.setState({
+            data: data
+          });
         });
-    });
+      });
   }
 
 
