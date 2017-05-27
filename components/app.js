@@ -67,7 +67,8 @@ class App extends Component {
         .then((resp) => resp.json())
         .then(function(data) {
           self.setState({
-            data: data
+            data: data,
+            movie: movie
           });
         });
       });
@@ -78,7 +79,8 @@ class App extends Component {
     var data = (this.state.data) ? this.state.data : '';
     return (
       <div>
-        <Searchbar searchChange={term => this.getdata(term)} />
+        //<Searchbar searchChange={term => this.getdata(term)} />
+        <Searchbar data={data} />
         <MoviePoster info={data} />
 
       </div>
