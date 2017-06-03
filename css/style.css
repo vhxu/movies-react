@@ -62,7 +62,7 @@ body #app {
 
 .movie-poster .poster {
   width: 100%;
-  margin-bottom: -5px;
+  margin-bottom: -4px;
 }
 
 .movie-poster .poster img {
@@ -76,6 +76,7 @@ body #app {
   opacity: 0.9;
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
+  width: 140%;
 }
 
 .title {

@@ -1,103 +1,44 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import Autosuggest from 'react-autosuggest';
 
-const getSuggestion = value => {
-  const inputValue = value.trim().toLowerCase();
-  const inputLength = inputValue.length;
-
-  return inputLength === 0 ? [] : this.props.data.title.filter(title =>
-  title.toLowerCase().slice(0, inputLength) === inputValue);
-};
-
-const getSuggestionValue = suggestion => suggestion.title;
-
-const renderSuggestion = suggestion => (
-  <div>
-    {suggestion.title}
-  </div>
-);
 
 class Searchbar extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
-    this.state = {
-      value: '',
-      suggestions: []
-    };
-  };
+    this.state = {term: ''};
+  }
 
-  onChange(event, { newValue }) {
-    this.setState({
-      value: newValue
-    });
-  };
-
-  onSuggestionsFetchRequested({value}) {
-    this.setState({
-      suggestions:getSuggestions(value)
-    });
-  };
-
-  onSuggestionsClearRequested() {
-    this.setState({
-      suggestions: []
-    });
-  };
+  getdata(term) {
+    var self = this;
+      fetch('https://api.themoviedb.org/3/search/movie?api_key=2c0adb15cfc22f4aa37121c648eb1c10&query='+term)
+      .then((resp) => resp.json())
+      .then(function(movie) {
+        const id = movie.results[0].id;
+        console.log(id);
+        self.props.searchChange(id);
+      });
+    }
 
   render() {
-    const { value, suggestions } = this.state;
-    const inputProps = {
-      placeholder: "Type Movie Name",
-      value,
-      onChange: this.onChange
-    };
     return (
       <div className="top">
         <div className = "logo">
           <img src= {'https://www.themoviedb.org/assets/static_cache/23e473036b28a59bd5dcfde9c671b1c5/images/v4/logos/312x276-primary-green.png'} />
         </div>
         <div className="search">
-          <Autosuggest
-            suggestions={suggestions}
-            onSuggestionFetchRequested={this.onSuggestionsFetchRequested}
-            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-            getSuggestionValue={getSuggestionValue}
-            renderSuggestion={renderSuggestion}
-            inputProps={inputProps}
-            />
+          <input
+            placeholder="Search Movie"
+            value={this.state.term}
+            onChange={event => this.onInputChange(event.target.value)}/>
         </div>
       </div>
-    );
+      );
+  }
+  onInputChange(term) {
+    this.setState({term});
+    this.getdata(term);
   }
 }
-
-
-// class Searchbar extends Component {
-//   constructor(props) {
-//     super(props);
-//
-//     this.state = {term: ''};
-//   }
-//   render() {
-//     return (
-//       <div className="top">
-//         <div className = "logo">
-//           <img src= {'https://www.themoviedb.org/assets/static_cache/23e473036b28a59bd5dcfde9c671b1c5/images/v4/logos/312x276-primary-green.png'} />
-//         </div>
-//         <div className="search">
-//           <input
-//             value={this.state.term}
-//             onChange={event => this.onInputChange(event.target.value)}/>
-//         </div>
-//       </div>
-//       );
-//   }
-//   onInputChange(term) {
-//     this.setState({term});
-//     this.props.searchChange(term);
-//   }
-// }
 
 export default Searchbar;
