@@ -4,7 +4,19 @@ import ReactDOM from 'react-dom';
 class MovieInfo extends Component {
   constructor(props) {
     super(props);
+
   }
+
+
+
+  // getList(items) {
+  //     var emptystring = [];
+  //     for (var j = 0; j < 3; j++) {
+  //       emptystring.push(items[j].name);
+  //     }
+  //     return emptystring.join('');
+  //     <h3 style={{color:"#01d277"}}><span>{this.getList(this.props.data.genres)}</span></h3>
+  // };
 
   render () {
 
@@ -13,12 +25,11 @@ class MovieInfo extends Component {
         <div className="title">
           <h1 style={{color:"#01d277"}}>{this.props.data.title} ({this.props.data.release_date.substr(0,4)})</h1>
           <h2 style={{color:"white"}}>{this.props.data.tagline}</h2>
-          <h3 style={{color:"#01d277"}}>{this.props.data.genres.map((genre, i) => <span key={i} className="genres">{genre.name}  </span>)}</h3>
+          <h3 style={{color:"#01d277"}}>{this.props.data.genres.map((genre, i) => <span key={i} className="genres">{genre.name},  </span>)}</h3>
 
         </div>
         <div>
           <p style={{color:"white"}}>{this.props.data.overview}</p>
-
         </div>
         <div>
           <div className="first-row">
@@ -47,6 +58,8 @@ class MovieInfo extends Component {
       </div>
     );
   }
+
+
 };
 
 
